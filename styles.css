@@ -1,0 +1,242 @@
+/* ===== Pokedex ===== */
+
+:root{
+  --bg:#0b0e15; --panel:#000000; --ink:#ffffff; --muted:#ffffff;
+  --brand:#242453; --accent:#f59e0b; --chip:#1b2435; --ok:#22c55e; --err:#ef4444;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font: 16px/1.5 "Poppins", system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+.dex{max-width:1200px;margin:0 auto;padding:16px}
+.dex__header{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.dex__title{margin:0;font-weight:700;letter-spacing:.2px}
+.dex__search{display:flex;gap:8px;flex-wrap:wrap}
+.dex__search-input,.dex__select{flex:1;min-width:200px;padding:12px 14px;border-radius:12px;border:1px solid #22324a;background:#0f1522;color:var(--ink)}
+.dex__select{flex:0 1 220px}
+.dex__btn{padding:12px 14px;border-radius:12px;border:1px solid transparent;background:var(--brand);color:#fff;cursor:pointer;font-weight:500}
+.dex__btn--ghost{background:transparent;border-color:#22324a}
+.dex__chips{display:flex;gap:6px;flex-wrap:wrap}
+.dex__chip{padding:6px 10px;border-radius:999px;border:1px solid #22324a;background:#0f1522;cursor:pointer}
+.dex__chip:focus{outline:2px solid var(--brand)}
+
+.dex__layout{display:grid;gap:12px;grid-template-columns:1.3fr 1fr .8fr}
+@media (max-width:992px){.dex__layout{grid-template-columns:1fr}}
+
+.dex__panel{background:var(--panel);border:1px solid #1e2a43;border-radius:14px;padding:12px;min-height:300px}
+.dex__panel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.dex__subtitle{margin:0 0 8px}
+.dex__muted{color:var(--muted)}
+.dex__listBar{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.dex__spacer{flex:1}
+
+.card{position:relative;display:flex;flex-direction:column;gap:8px;background:#0f1522;border:1px solid #1e2a43;border-radius:14px;padding:10px}
+.card--fav{outline:2px solid var(--ok)}
+.card__fav{position:absolute;top:8px;right:8px;border:1px solid #1e2a43;background:#0b1120;color:#fff;border-radius:999px;padding:6px 8px;cursor:pointer}
+.card__fav.is-on{background:var(--err)}
+.card__img{width:100%;height:120px;object-fit:contain;background:#0b1120;border:1px solid #1e2a43;border-radius:10px}
+.card__name{margin:4px 0 0;font-weight:500}
+.card__types{list-style:none;display:flex;gap:6px;padding:0;margin:0;flex-wrap:wrap}
+.card__types li{padding:4px 8px;border-radius:999px;background:var(--chip);border:1px solid #1e2a43;font-size:.8rem}
+.card__more{margin-top:auto;padding:8px 10px;border-radius:10px;border:1px solid #1e2a43;background:#0b1120;color:#e6f;cursor:pointer;font-weight:500}
+
+.dex__favHead{display:flex;align-items:center;gap:8px;}
+.dex__favlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.dex__footer{margin-top:12px;color:var(--muted);text-align:center;font-size:.9rem}
+
+/* Skeletons */
+.sk{background:#0f1522;border:1px solid #1e2a43;border-radius:14px;padding:10px}
+.sk__img{height:120px;background:linear-gradient(90deg,#0e1422,#0f192a,#0e1422);border-radius:10px;animation:sh 1.2s infinite linear}
+.sk__line{height:12px;margin:8px 0;background:linear-gradient(90deg,#0e1422,#0f192a,#0e1422);border-radius:6px;animation:sh 1.2s infinite linear}
+.sk__chips{height:20px;background:linear-gradient(90deg,#0e1422,#0f192a,#0e1422);border-radius:10px;animation:sh 1.2s infinite linear}
+.sk__btn{height:32px;margin-top:8px;background:linear-gradient(90deg,#0e1422,#0f192a,#0e1422);border-radius:8px;animation:sh 1.2s infinite linear}
+@keyframes sh{0%{background-position:0 0}100%{background-position:200% 0}}
+
+/* === Barra de búsqueda  === */
+.dex__search-input,
+.dex__select{
+  background:#0f1522;
+  border:1.5px solid rgba(255, 255, 255, 0.24);   
+  border-radius:14px;
+  padding:12px 14px;
+  color:#e9f1ff;                              
+}
+
+/* placeholder */
+.dex__search-input::placeholder{
+  color:#ffffff;
+  opacity:.95;
+}
+
+.dex__search-input:hover,
+.dex__select:hover{
+  border-color: rgba(255,255,255,.36);
+}
+.dex__search-input:focus,
+.dex__select:focus{
+  outline:none;
+  border-color:#ffffff;                       
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.06) inset,
+    0 0 0 2px rgba(255,255,255,.06);           
+}
+
+.dex__chip{
+  color:#dce9ff;                               
+  background:#0f1522;
+  border:1.2px solid rgba(255,255,255,.22);    
+  font-weight:500;                              
+}
+.dex__chip:hover{
+  color:#ffffff;
+  border-color:#ffffff;                         /* Para destacar al pasar el mouse */
+}
+
+
+/* === Botón "Detalles" (tipografía + presencia) === */
+.card__more{
+  font: 600 14px/1.1 "Inter", "Poppins", system-ui, -apple-system, Segoe UI, Roboto;
+  letter-spacing:.2px;
+
+  /* Presencia/Contraste */
+  color:#ffffff;
+  background: linear-gradient(180deg, #1a1030, #0f1126);
+  border:1.5px solid #4533ff;             /* línea visible */
+  box-shadow: 0 0 0 0 rgba(69,51,255,.0);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.card__more:hover{
+  transform: translateY(-1px);
+  border-color:#7c5cff;
+  box-shadow: 0 4px 20px rgba(124,92,255,.25);
+}
+
+/* === Imágenes  === */
+.card__img{
+  transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+  border-radius: 12px; /* un pelín más redonda */
+}
+.card:hover .card__img{
+  transform: scale(1.03);
+  filter: saturate(1.12) contrast(1.06);
+  box-shadow: 0 8px 30px rgba(124,92,255,.18);
+}
+
+/* Pop breve cuando la tarjeta/imagen aparece */
+.card__img.is-new{
+  animation: img-pop .6s ease-out both;
+}
+@keyframes img-pop{
+  0%   { transform: scale(.96); filter: saturate(.9) blur(.2px); box-shadow: none; }
+  60%  { transform: scale(1.05); }
+  100% { transform: scale(1); filter: none; }
+}
+
+/* Colores en los fondos de los pokemones */
+.card__img{
+  transition: background-color .2s ease, transform .25s ease, filter .25s ease, box-shadow .25s ease, border-color .2s ease;
+}
+.card:hover .card__img{
+  background-color: var(--type, #f59e0b);
+  transform: scale(1.03);
+  filter: saturate(1.12) contrast(1.06);
+  box-shadow: 0 8px 28px color-mix(in oklab, var(--type, #f59e0b) 35%, transparent);
+  border-color: color-mix(in oklab, var(--type, #f59e0b) 70%, #1e2a43);
+}
+
+.card__more:hover{
+  border-color: var(--type, #7c5cff);
+  box-shadow: 0 4px 20px color-mix(in oklab, var(--type, #7c5cff) 28%, transparent);
+}
+
+.card__fav.is-on{
+  background: var(--type, #ef4444);
+  border-color: color-mix(in oklab, var(--type, #ef4444) 60%, #1e2a43);
+}
+
+.card{ position: relative; } 
+
+.card__img{
+  position: relative;      
+  z-index: 1;
+}
+
+.card__fav{
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 5;               
+  padding: 6px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.35);
+  background: rgba(10,12,20,.55);   
+  backdrop-filter: blur(4px);
+  color: #fff;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform .15s ease, border-color .15s ease, background-color .15s ease;
+}
+
+.card__fav:hover{
+  transform: scale(1.06);
+  border-color: #fff;
+  background: rgba(15,18,30,.75)
+  }
+
+.dex__header{ align-items: stretch; }
+.dex__title{ width:100%; margin:0 0 8px; text-align:center; }
+
+/* Texto y tipo de letra */
+
+#homeBtn{
+  font-family: "Luckiest Guy", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(32px, 6vw, 64px);
+  letter-spacing: .5px;
+  color:#ffcb05 !important;
+  -webkit-text-stroke: 2px #000d85;
+  text-shadow: 2px 2px 0 #000000,-2px 2px 0 #2a75bb,2px -2px 0 #000000,-2px -2px 0 #2a75bb;
+  text-decoration:none;
+}
+
+.dex__panel--detail,
+.dex__panel--fav{
+  font-family: "Baloo", "Poppins", system-ui, sans-serif;
+}
+
+.dex__panel--fav .dex__subtitle{
+  font-weight: 800;
+  letter-spacing: .3px;
+}
+
+.dex__panel--detail p,
+.dex__panel--fav p{
+  font-weight: 600;     
+  letter-spacing: .2px; 
+}
+
+body{
+  /* … */
+  font: 16px/1.5 "Poppins", system-ui, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial;
+}
+
+.dex__panel--detail,
+.dex__panel--fav{
+  font-family: "Poppins", system-ui, Segoe UI, Roboto, Arial, sans-serif !important;
+}
+
+.dex__panel--fav .dex__subtitle{
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+.dex__panel--detail p,
+.dex__panel--fav p{
+  font-weight: 500;
+  letter-spacing: .15px;
+}

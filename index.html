@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pokédex</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="dex">
+    <header class="dex__header">
+      <h1 class="dex__title">
+		<a href="#" id="homeBtn" class="dex__home">PoKéDeX</a>
+	</h1>
+
+      <form class="dex__search" id="searchForm" autocomplete="off">
+        <input class="dex__search-input" id="q" name="q" placeholder="Buscar Pokémon…" />
+        <select class="dex__select" id="typeFilter" aria-label="Filtrar por tipo">
+          <option value="">Todos los tipos</option>
+        </select>
+        <button class="dex__btn" type="submit">🔍️</button>
+        <button class="dex__btn dex__btn--ghost" id="seedBtn" type="button">Inicio</button>
+      </form>
+      <div class="dex__chips" id="recentChips" aria-label="Búsquedas recientes"></div>
+    </header>
+
+    <main class="dex__layout">
+      <section class="dex__panel dex__panel--list">
+        <div class="dex__listBar">
+          <span class="dex__muted" id="listInfo">—</span>
+          <div class="dex__spacer"></div>
+          <button class="dex__btn dex__btn--ghost" id="prevBtn" type="button">◀ Ant</button>
+          <button class="dex__btn" id="nextBtn" type="button">Sig ▶</button>
+        </div>
+        <div class="dex__panel-grid" id="list"></div>
+      </section>
+
+      <aside class="dex__panel dex__panel--detail" id="detail" aria-live="polite">
+        <p class="dex__muted">Selecciona un Pokémon para ver detalles.</p>
+      </aside>
+
+      <aside class="dex__panel dex__panel--fav">
+        <div class="dex__favHead">
+          <h2 class="dex__subtitle">Favoritos</h2>
+          <button class="dex__btn dex__btn--ghost" id="clearFavsBtn" type="button">Limpiar</button>
+        </div>
+        <div id="favList" class="dex__favlist"></div>
+      </aside>
+    </main>
+
+    <footer class="dex__footer">
+      <small>Fuente de datos: <a href="https://pokeapi.co/" target="_blank" rel="noopener">PokéAPI</a></small>
+    </footer>
+  </div>
+
+  <template id="tplCard">
+    <article class="card" role="article">
+      <button class="card__fav" title="Favorito" aria-label="Favorito">♡</button>
+      <img class="card__img" alt="" loading="lazy" />
+      <h3 class="card__name"></h3>
+      <ul class="card__types"></ul>
+      <button class="card__more">Detalles</button>
+    </article>
+  </template>
+
+  <template id="tplSkeleton">
+    <div class="sk">
+      <div class="sk__img"></div>
+      <div class="sk__line"></div>
+      <div class="sk__chips"></div>
+      <div class="sk__btn"></div>
+    </div>
+  </template>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
+
