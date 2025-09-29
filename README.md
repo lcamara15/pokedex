@@ -23,5 +23,8 @@ Incluye paginación, filtro por tipo, buscador con lupa, deep-link por hash y de
 - Inicio: Click en el logo “Pokédex” o en el botón Inicio para resetear filtros/búsqueda.
 - Enlace directo: Añade #nombre o #id a la URL.
 
+**Aplicación web**
+
+https://lcamara15.github.io/pokedex/
 
 
